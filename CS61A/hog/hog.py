@@ -275,7 +275,7 @@ def make_averaged(original_function, samples_count=1000):
     "*** YOUR CODE HERE ***"
     def averaged_dice(*args):
         total = 0
-        for i in range (samples_count):
+        for i in range(samples_count):
             outcome = original_function(*args)
             total += outcome
         return total / samples_count
@@ -357,11 +357,9 @@ def boar_strategy(score, opponent_score, threshold=11, num_rolls=6):
 def sus_strategy(score, opponent_score, threshold=11, num_rolls=6):
     """This strategy returns 0 dice when your score would increase by at least threshold."""
     # BEGIN PROBLEM 11
-    increased_board = boar_strategy(score, opponent_score)
-    new_score = score + increased_board
+    increased_board = sus_update(0, score, opponent_score)
 
-    increased_sus = sus_points(new_score)
-    if increased_sus >= threshold:
+    if increased_board - score >= threshold:
         return 0
     else:
         return num_rolls  # Remove this line once implemented.
